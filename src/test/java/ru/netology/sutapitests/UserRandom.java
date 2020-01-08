@@ -1,12 +1,12 @@
 package ru.netology.sutapitests;
 
 public class UserRandom {
-    String name;
+    String login;
     String password;
     String status;
 
-    public UserRandom(String name, String password, String status) {
-        this.name = name;
+    public UserRandom(String login, String password, String status) {
+        this.login = login;
         this.password = password;
         this.status = status;
     }
