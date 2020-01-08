@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.restassured.RestAssured.given;
 
-public class AuthTest {
+public class AuthTests {
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
             .setPort(9999)
