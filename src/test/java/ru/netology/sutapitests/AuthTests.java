@@ -128,9 +128,9 @@ public class AuthTests {
     //данные захардкоржены намеренно, для уверенности что логин один и тот же, а пароли разные
     @DisplayName("Дважды передаем пользователя с одним и тем же именем. На второй раз у него перезаписывается пароль. Оба раза должен произойти успешный логин")
     void reWriteUserWhichChangePassword() {
-        UserRandom userRandom = UserRandom.hardcodedData1();
+        UserRandom userFirstPassword = UserRandom.hardcodedData1();
         Gson gson = new Gson();
-        String json = gson.toJson(userRandom);
+        String json = gson.toJson(userFirstPassword);
 
         given()
                 .spec(requestSpec)
@@ -142,18 +142,18 @@ public class AuthTests {
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue(userRandom.login);
-        form.$("[data-test-id=password] input").setValue(userRandom.password);
+        form.$("[data-test-id=login] input").setValue(userFirstPassword.login);
+        form.$("[data-test-id=password] input").setValue(userFirstPassword.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("heading_theme_alfa-on-white")).shouldHave(exactText("Личный кабинет"));
 
-        UserRandom userRandomChangedPassword = UserRandom.hardcodedData2();
+        UserRandom userChangedPassword = UserRandom.hardcodedData2();
         Gson gson2 = new Gson();
-        String json2 = gson2.toJson(userRandomChangedPassword);
+        String json2 = gson2.toJson(userChangedPassword);
 
         given()
                 .spec(requestSpec)
-                .body(json)
+                .body(json2)
                 .when()
                 .post("/api/system/users")
                 .then()
@@ -161,8 +161,8 @@ public class AuthTests {
 
         open("http://localhost:9999");
         //SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue(userRandomChangedPassword.login);
-        form.$("[data-test-id=password] input").setValue(userRandomChangedPassword.password);
+        form.$("[data-test-id=login] input").setValue(userChangedPassword.login);
+        form.$("[data-test-id=password] input").setValue(userChangedPassword.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("heading_theme_alfa-on-white")).shouldHave(exactText("Личный кабинет"));
         //close();
