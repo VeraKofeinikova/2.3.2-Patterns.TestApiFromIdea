@@ -12,8 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
-import java.util.Random;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.restassured.RestAssured.given;
@@ -26,25 +24,6 @@ public class AuthTests {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
-    
-    public static final String[] names = {
-            "vasya",
-            "gera",
-            "marina",
-            "kostya",
-            "vlad"
-    };
-    Random random = new Random();
-    String login = names[random.nextInt(names.length)];
-
-    public static final String[] passwords = {
-            "password1",
-            "password2",
-            "password3",
-            "password4",
-            "password5"
-    };
-    String password = passwords[random.nextInt(passwords.length)];
 
     @BeforeEach
     public void clearCookies() {
@@ -56,7 +35,7 @@ public class AuthTests {
     @Test
     @DisplayName("Успешный вход. Пользователь active, имеет валидные логин и пароль")
     void loginSuccessUserActiveValidLoginValidPassword() {
-        UserRandom userRandom = new UserRandom(login, password, "active");
+        UserRandom userRandom = UserRandom.createNewUserActive();
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
@@ -70,8 +49,8 @@ public class AuthTests {
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue(login);
-        form.$("[data-test-id=password] input").setValue(password);
+        form.$("[data-test-id=login] input").setValue(userRandom.login);
+        form.$("[data-test-id=password] input").setValue(userRandom.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("heading_theme_alfa-on-white")).shouldHave(exactText("Личный кабинет"));
     }
@@ -79,7 +58,7 @@ public class AuthTests {
     @Test
     @DisplayName("Невозможно войти. Пользователь blocked, имеет валидные логин и пароль")
     void loginFailedUserBlockedValidLoginValidPassword() {
-        UserRandom userRandom = new UserRandom(login, password, "blocked");
+        UserRandom userRandom = UserRandom.createNewUserBlocked();
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
@@ -93,8 +72,8 @@ public class AuthTests {
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue(login);
-        form.$("[data-test-id=password] input").setValue(password);
+        form.$("[data-test-id=login] input").setValue(userRandom.login);
+        form.$("[data-test-id=password] input").setValue(userRandom.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("notification__content")).shouldBe(visible).shouldHave(text("Пользователь заблокирован"));
     }
@@ -102,7 +81,7 @@ public class AuthTests {
     @Test
     @DisplayName("Невозможно войти. Пользователь active, неправильный логин-правильный пароль")
     void loginFailedUserActiveNotValidLoginValidPassword() {
-        UserRandom userRandom = new UserRandom(login, password, "active");
+        UserRandom userRandom = UserRandom.createNewUserActive();
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
@@ -117,7 +96,7 @@ public class AuthTests {
         open("http://localhost:9999");
         SelenideElement form = $("form");
         form.$("[data-test-id=login] input").setValue("oksana");
-        form.$("[data-test-id=password] input").setValue(password);
+        form.$("[data-test-id=password] input").setValue(userRandom.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("notification__content")).shouldBe(visible).shouldHave(text("Неверно указан логин или пароль"));
     }
@@ -125,7 +104,7 @@ public class AuthTests {
     @Test
     @DisplayName("Невозможно войти. Пользователь active, правильный логин-неправильный пароль")
     void loginFailedUserActiveValidLoginNotValidPassword() {
-        UserRandom userRandom = new UserRandom(login, password, "active");
+        UserRandom userRandom = UserRandom.createNewUserActive();
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
@@ -139,7 +118,7 @@ public class AuthTests {
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue(login);
+        form.$("[data-test-id=login] input").setValue(userRandom.login);
         form.$("[data-test-id=password] input").setValue("password19");
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("notification__content")).shouldBe(visible).shouldHave(text("Неверно указан логин или пароль"));
