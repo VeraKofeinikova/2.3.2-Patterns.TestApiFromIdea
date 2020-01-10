@@ -68,6 +68,22 @@ public class UserRandom {
         UserRandom user = new UserRandom(login, password, status);
         return user;
     }
+
+    public static UserRandom hardcodedData1() {
+        String login = "aleksei";
+        String password = "password10";
+        String status = "active";
+        UserRandom user = new UserRandom(login, password, status);
+        return user;
+    }
+
+    public static UserRandom hardcodedData2() {
+        String login = "aleksei";
+        String password = "password15";
+        String status = "active";
+        UserRandom user = new UserRandom(login, password, status);
+        return user;
+    }
 }
 
 

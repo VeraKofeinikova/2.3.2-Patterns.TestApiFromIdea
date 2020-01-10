@@ -128,7 +128,7 @@ public class AuthTests {
     //данные захардкоржены намеренно, для уверенности что логин один и тот же, а пароли разные
     @DisplayName("Дважды передаем пользователя с одним и тем же именем. На второй раз у него перезаписывается пароль. Оба раза должен произойти успешный логин")
     void reWriteUserWhichChangePassword() {
-        UserRandom userRandom = new UserRandom("aleksei", "password10", "active");
+        UserRandom userRandom = UserRandom.hardcodedData1();
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
@@ -142,12 +142,12 @@ public class AuthTests {
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue("aleksei");
-        form.$("[data-test-id=password] input").setValue("password10");
+        form.$("[data-test-id=login] input").setValue(userRandom.login);
+        form.$("[data-test-id=password] input").setValue(userRandom.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("heading_theme_alfa-on-white")).shouldHave(exactText("Личный кабинет"));
 
-        UserRandom userRandomChangedPassword = new UserRandom("aleksei", "password15", "active");
+        UserRandom userRandomChangedPassword = UserRandom.hardcodedData2();
         Gson gson2 = new Gson();
         String json2 = gson2.toJson(userRandomChangedPassword);
 
@@ -161,8 +161,8 @@ public class AuthTests {
 
         open("http://localhost:9999");
         //SelenideElement form = $("form");
-        form.$("[data-test-id=login] input").setValue("aleksei");
-        form.$("[data-test-id=password] input").setValue("password15");
+        form.$("[data-test-id=login] input").setValue(userRandomChangedPassword.login);
+        form.$("[data-test-id=password] input").setValue(userRandomChangedPassword.password);
         form.$(By.className("button_theme_alfa-on-white")).click();
         $(By.className("heading_theme_alfa-on-white")).shouldHave(exactText("Личный кабинет"));
         //close();
