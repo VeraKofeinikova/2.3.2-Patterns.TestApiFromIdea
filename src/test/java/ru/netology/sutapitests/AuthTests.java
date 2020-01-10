@@ -39,13 +39,13 @@ public class AuthTests {
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(json) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then()// "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+        given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
@@ -62,13 +62,13 @@ public class AuthTests {
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(json) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then()// "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+        given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
@@ -85,13 +85,13 @@ public class AuthTests {
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(json) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then()// "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+        given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
@@ -108,13 +108,13 @@ public class AuthTests {
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(json) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then()// "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+        given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
@@ -132,13 +132,13 @@ public class AuthTests {
         Gson gson = new Gson();
         String json = gson.toJson(userRandom);
 
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(json) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then()// "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+        given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
 
         open("http://localhost:9999");
         SelenideElement form = $("form");
@@ -151,13 +151,13 @@ public class AuthTests {
         Gson gson2 = new Gson();
         String json2 = gson2.toJson(userRandomChangedPassword);
 
-        given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(json2) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then()// "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+        given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
 
         open("http://localhost:9999");
         //SelenideElement form = $("form");
